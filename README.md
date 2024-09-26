@@ -98,22 +98,22 @@
     <div class="card">
         <h3>Feature 1</h3>
         <img src="https://i.postimg.cc/nrCNpGYf/photo-2024-09-23-04-34-17.jpg">
-        <p>Discover amazing features that enhance your experience.</p>
+        <p>ခွေးများနှင့် သင့်အတွေ့အကြုံကို မြှင့်တင်ပေးသည့် အံ့သြဖွယ်လုပ်ဆောင်ချက်များကို ရှာဖွေပါ။</p>
     </div>
     <div class="card">
         <h3>Feature 2</h3>
-        <img src="https://images.pexels.com/photos/1122410/pexels-photo-1122410.jpeg" alt="A playful dog">
+        <img src="https://i.postimg.cc/3x1Ph9TJ/photo-2024-08-21-02-19-10.jpg" alt="A playful dog">
         <p>Engage with interactive content designed for you.</p>
     </div>
     <div class="card">
         <h3>Feature 3</h3>
-        <img src="https://images.pexels.com/photos/2204532/pexels-photo-2204532.jpeg" alt="A beautiful lady">
+        <img src="https://i.postimg.cc/XYsDmJfr/photo-2024-08-21-02-18-08.jpg" alt="A beautiful lady">
         <p>Join our community and share your knowledge!</p>
     </div>
 </div>
 
 <footer>
-    <p>&copy; 2024 My Beautiful Page. All Rights Reserved.</p>
+    <p>&copy; ခွေးတစ်ကောင်အိပ်နေသည်.</p>
 </footer>
 
 </body>
