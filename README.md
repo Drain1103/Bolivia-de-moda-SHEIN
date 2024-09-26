@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden;
-            background: url('https://i.postimg.cc/rp2KgsQG/photo-2024-09-22-04-48-07.jpg') no-repeat center center fixed;
+            background: url('[https://i.postimg.cc/rp2KgsQG/photo-2024-09-22-04-48-07.jpg](https://i.postimg.cc/rp2KgsQG/photo-2024-09-22-04-48-07.jpg)') no-repeat center center fixed;
             background-size: cover;
         }
         header {
