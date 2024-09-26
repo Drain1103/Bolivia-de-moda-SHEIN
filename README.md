@@ -97,7 +97,7 @@
 <div class="container">
     <div class="card">
         <h3>Feature 1</h3>
-        <img src="[https://i.postimg.cc/kGZBnKBR/photo-2024-09-21-21-34-45.jpg" alt="A cute dog](https://i.postimg.cc/nrCNpGYf/photo-2024-09-23-04-34-17.jpg)">
+        <img src="https://i.postimg.cc/nrCNpGYf/photo-2024-09-23-04-34-17.jpg">
         <p>Discover amazing features that enhance your experience.</p>
     </div>
     <div class="card">
