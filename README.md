@@ -98,17 +98,17 @@
     <div class="card">
         <h3>Feature 1</h3>
         <img src="https://i.postimg.cc/nrCNpGYf/photo-2024-09-23-04-34-17.jpg">
-        <p>ခွေးများနှင့် သင့်အတွေ့အကြုံကို မြှင့်တင်ပေးသည့် အံ့သြဖွယ်လုပ်ဆောင်ချက်များကို ရှာဖွေပါ။</p>
+        <p>ခွေးတစ်ကောက်ရှိုးထုတ်နေသည် </p>
     </div>
     <div class="card">
         <h3>Feature 2</h3>
         <img src="https://i.postimg.cc/3x1Ph9TJ/photo-2024-08-21-02-19-10.jpg" alt="A playful dog">
-        <p>Engage with interactive content designed for you.</p>
+        <p>အလုပ်ကြိုးစားသောခွေးလေး.</p>
     </div>
     <div class="card">
         <h3>Feature 3</h3>
         <img src="https://i.postimg.cc/XYsDmJfr/photo-2024-08-21-02-18-08.jpg" alt="A beautiful lady">
-        <p>Join our community and share your knowledge!</p>
+        <p>ကပ်တိုးလေးခိုးအိပ်နေတာပေါ့</p>
     </div>
 </div>
 
@@ -119,3 +119,4 @@
 </body>
 </html>
 <iframe src="https://go.screenpal.com/watch/cZQtD6VSGyV" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+<p>ခွေးကလေးကနေသည်။</p>
