@@ -1,155 +1,126 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Message Box</title>
+    <title>Beautiful Lucky Spin Wheel</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             height: 100vh;
-            background: linear-gradient(to right, #74ebd5, #ACB6E5); /* Gradient background */
+            background: linear-gradient(to bottom right, #e0f7fa, #b2ebf2);
+            font-family: 'Arial', sans-serif;
             margin: 0;
         }
-        .message-box {
-            background-color: white;
-            border-radius: 15px; /* More rounded corners */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow for a modern look */
-            padding: 30px; /* Increased padding */
-            width: 350px; /* Slightly wider box */
-            text-align: center;
-            transition: transform 0.3s; /* Smooth hover effect */
+        h1 {
+            margin-bottom: 20px;
+            color: #00695c;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
-        .message-box:hover {
-            transform: scale(1.02); /* Subtle scaling on hover */
+        .wheel-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            background-color: #fff;
         }
-        .message-box h2 {
-            margin-bottom: 20px; /* Increased margin */
-            color: #333;
-            font-size: 24px; /* Larger font size */
-        }
-        .message-box label {
-            margin-bottom: 8px; /* Increased margin */
-            display: block;
-            color: #666;
-            font-weight: bold; /* Bold label text */
-        }
-        .message-box input, .message-box textarea {
+        .wheel {
             width: 100%;
-            border-radius: 8px; /* Rounded corners */
-            border: 2px solid #ddd; /* Thicker border */
-            padding: 12px; /* Increased padding */
-            margin-bottom: 15px; /* Increased margin */
-            font-size: 16px; /* Font size */
-            transition: border-color 0.3s; /* Smooth border color transition */
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                #ffcc00 0% 50%,   /* 50% - Reward 1 */
+                #ff5722 50% 100%   /* 50% - Reward 2 */
+            );
+            transition: transform 2s ease-out;
+            border: 10px solid #fff; /* White border for a clean look */
         }
-        .message-box input:focus, .message-box textarea:focus {
-            border-color: #007bff; /* Border color on focus */
-            outline: none; /* Remove default outline */
+        .pointer {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 20px solid #ff4081; /* Pointer color */
+            z-index: 1;
         }
-        .message-box textarea {
-            height: 120px; /* Taller textarea */
-            resize: none;
-        }
-        .message-box button {
-            background-color: #28a745; /* Primary button color */
-            color: white;
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
             border: none;
-            border-radius: 8px; /* Rounded button corners */
-            padding: 12px;
-            width: 100%;
+            border-radius: 5px;
+            background-color: #00796b;
+            color: white;
+            font-size: 16px;
             cursor: pointer;
-            font-size: 18px; /* Larger font size */
-            margin-bottom: 12px; /* Increased spacing between buttons */
-            transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
-        .message-box button:hover {
-            background-color: #218838; /* Darker green on hover */
-            transform: translateY(-2px); /* Lift effect */
+        button:hover {
+            background-color: #004d40;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
         }
-        .message-display {
-            margin-top: 20px; /* Increased top margin */
+        #rewardMessage {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #00796b;
+            font-weight: bold;
             text-align: center;
-            display: none; /* Hide initially */
-            width: 100%;
-            max-width: 400px; /* Limit maximum width */
-        }
-        .message {
-            margin: 10px 0; /* Margin for spacing between messages */
-            border-radius: 8px; /* Rounded corners */
-            padding: 12px; /* Padding for better spacing */
-            background: linear-gradient(135deg, #6dd5ed, #2193b0); /* Gradient background for messages */
-            color: white; /* White text for better contrast */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Deeper shadow for messages */
-            font-size: 16px; /* Font size for the message text */
-            opacity: 0; /* Initially hidden for fade-in effect */
-            transform: translateY(20px); /* Start slightly lower for animation */
-            transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transitions */
-        }
-        .message.visible {
-            opacity: 1; /* Fully visible */
-            transform: translateY(0); /* Reset position */
-        }
-        .message:hover {
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.7); /* Glowing effect on hover */
-            transform: scale(1.02); /* Slightly scale up on hover */
-        }
-        .sender {
-            font-weight: bold; /* Make sender's name bold */
-            font-size: 18px; /* Slightly larger font size for the sender's name */
-            margin-bottom: 5px; /* Space between name and message */
         }
     </style>
 </head>
 <body>
-    <div class="message-box" id="messageBox">
-        <h2>Send a Message</h2>
-        <label for="sender">Your Name:</label>
-        <input type="text" id="sender" placeholder="Enter your name" required>
-        <label for="message">Your Message:</label>
-        <textarea id="message" placeholder="Type your message here..." required></textarea>
-        <button type="submit" onclick="sendMessage()">Send</button>
-        <button class="open-button" onclick="openMessage()">[ Open It! 📬 ]</button>
-    </div>
 
-    <div class="message-display" id="messageDisplay"></div> <!-- Move this below the message box -->
+<h1>Lucky Spin Wheel!</h1>
+<div class="wheel-container">
+    <div class="pointer"></div>
+    <div class="wheel" id="wheel"></div>
+</div>
+<button onclick="spinWheel(3)">Spin the Wheel!</button>
+<div id="rewardMessage"></div>
 
-    <script>
-        let messages = []; // Store messages
-        function sendMessage() {
-            const senderInput = document.getElementById('sender');
-            const messageInput = document.getElementById('message');
-            const senderName = senderInput.value; // Get the value from the name input
-            const messageText = messageInput.value; // Get the value from the textarea
-            
-            if (senderName && messageText) { // Check if the name and message are not empty
-                messages.push({ name: senderName, text: messageText }); // Store the message with sender's name
-                senderInput.value = ''; // Clear the name input
-                messageInput.value = ''; // Clear the textarea
+<script>
+    let isSpinning = false; // To prevent multiple spins at the same time
+
+    function spinWheel(spinCount) {
+        if (isSpinning) return; // Prevent spinning if already in progress
+        isSpinning = true; // Set spinning state to true
+
+        const wheel = document.getElementById('wheel');
+        const spinDuration = 2000; // Duration for one spin in milliseconds
+        let totalRotation = 0;
+
+        // Function to perform spins
+        const performSpin = (count) => {
+            if (count > 0) {
+                // Generate a random degree to spin (faster)
+                const randomDegree = Math.floor(Math.random() * 360 + 720); // Spin at least 2 full rotations
+                totalRotation += randomDegree; // Keep track of total rotation
+                wheel.style.transition = `transform ${spinDuration}ms ease-out`; // Set spin duration
+                wheel.style.transform = `rotate(${totalRotation}deg)`; // Apply the rotation
+
+                // After the spin, call performSpin recursively for the next spin
+                setTimeout(() => performSpin(count - 1), spinDuration);
+            } else {
+                // Show result only once after all spins
+                document.getElementById('rewardMessage').innerText = 'You won: 50000မပေးဘူး';
+                isSpinning = false; // Reset spinning state
             }
-        }
+        };
 
-        function openMessage() {
-            const messageDisplay = document.getElementById('messageDisplay');
-            messageDisplay.innerHTML = ''; // Clear previous messages
+        // Start the spins
+        performSpin(spinCount);
+    }
+</script>
 
-            messages.forEach((message, index) => {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = 'message'; // Class for styling messages
-                messageDiv.innerHTML = `<div class="sender">${message.name}</div><div>${message.text}</div>`; // Set the message text and sender name
-                messageDisplay.appendChild(messageDiv); // Append each message
-                
-                // Trigger the visible class after a short delay for animation
-                setTimeout(() => {
-                    messageDiv.classList.add('visible');
-                }, index * 100); // Stagger the appearance
-            });
-
-            messageDisplay.style.display = 'block'; // Show the message display
-            document.getElementById('messageBox').classList.add('hidden'); // Hide the input box
-        }
-    </script>
 </body>
 </html>
