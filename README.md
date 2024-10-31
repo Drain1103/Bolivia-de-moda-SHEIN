@@ -362,39 +362,6 @@
                 </div>
             </div>
         </div>
-<div class="product-grid">
-    <div class="product">
-        <img src="https://peazxcv.com/api//file/cfg/202410/10/3ab9104a36224950a46c5168e8035915_.png" alt="Stylish Backpack">
-        <h3>Stylish Backpack</h3>
-        <p>$10.00</p>
-    </div>
-    <div class="product">
-        <img src="https://peazxcv.com/api//file/cfg/202410/10/2756ce8ac2514a55b0dc92bfc2378610_.png" alt="Wireless Headphones">
-        <h3>Wireless Headphones</h3>
-        <p>$15.00</p>
-    </div>
-    <div class="product">
-        <img src="https://peazxcv.com/api//file/cfg/202410/10/fa0f5bd1885d4102a53658cc85f7a256_.png" alt="Smartwatch">
-        <h3>Smartwatch</h3>
-        <p>$20.00</p>
-    </div>
-    <div class="product">
-        <img src="https://peazxcv.com/api//file/cfg/202410/10/4bc709a8cfae465a809a467497036969_.jpg" alt="Product 4">
-        <h3>Product 4</h3>
-        <p>$25.00</p>
-    </div>
-    <div class="product">
-        <img src="https://peazxcv.com/api//file/cfg/202410/10/4bc709a8cfae465a809a467497036969_.jpg" alt="Product 5">
-        <h3>Product 5</h3>
-        <p>$30.00</p>
-    </div>
-    <div class="product">
-        <img src="https://peazxcv.com/api//file/cfg/202410/10/b322df5d5ed44cefabda47ce18ea802d_.png" alt="Product 6">
-        <h3>Product 6</h3>
-        <p>$35.00</p>
-    </div>
-</div>
-
         
  <!-- Full Profile Photo Modal -->
     <div class="full-profile-photo" id="full-profile-photo">
