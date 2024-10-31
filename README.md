@@ -1,8 +1,7 @@
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Create Work Account</title>
     <style>
         body {
@@ -14,7 +13,7 @@
             height: 100vh;
             margin: 0;
             padding: 20px;
-            transition: background-color 0.3s;
+            overflow: hidden;
         }
         .form-container, .account-layout {
             background-color: #fff;
@@ -76,7 +75,7 @@
         }
         .cover-photo {
             width: 100%;
-            height: 300px;
+            height: 200px; /* Adjusted for mobile view */
             background-image: url('cover-photo.jpg');
             background-size: cover;
             background-position: center;
@@ -84,12 +83,12 @@
         }
         .profile-picture {
             position: absolute;
-            bottom: -75px;
+            bottom: -50px; /* Adjusted for mobile view */
             left: 20px;
             border: 5px solid white;
             border-radius: 50%;
-            width: 150px;
-            height: 150px;
+            width: 100px; /* Adjusted for mobile view */
+            height: 100px; /* Adjusted for mobile view */
             background-color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             overflow: hidden;
@@ -109,19 +108,19 @@
         }
         .profile-info {
             padding: 20px;
-            margin-top: 60px;
+            margin-top: 30px; /* Adjusted for mobile view */
             background-color: #ffffff;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .profile-info h1 {
-            font-size: 28px;
+            font-size: 24px; /* Adjusted for mobile view */
             margin-bottom: 5px;
             color: #333;
         }
         .profile-info p {
             color: #666;
-            font-size: 16px;
+            font-size: 14px; /* Adjusted for mobile view */
         }
         .tabs {
             display: flex;
@@ -136,8 +135,8 @@
         .tabs a {
             text-decoration: none;
             color: #4a90e2;
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 10px 5px; /* Adjusted for mobile view */
+            font-size: 14px; /* Adjusted for mobile view */
             border: 2px solid transparent;
             transition: background-color 0.3s, color 0.3s, border 0.3s;
         }
@@ -150,7 +149,7 @@
         .profile-details {
             margin-top: 20px;
             background-color: #ffffff;
-            padding: 20px;
+            padding: 10px; /* Adjusted for mobile view */
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
@@ -163,28 +162,28 @@
         }
         .products-section {
             margin-top: 20px;
-            padding: 20px;
+            padding: 10px; /* Adjusted for mobile view */
             background-color: #ffffff;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .products-section h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
+            font-size: 20px; /* Adjusted for mobile view */
+            margin-bottom: 10px; /* Adjusted for mobile view */
             color: #4a90e2;
         }
         .product-grid {
             display: flex;
-            gap: 15px;
+            gap: 10px; /* Adjusted for mobile view */
             flex-wrap: wrap;
         }
         .product {
             background-color: #f7f7f7;
-            padding: 10px;
+            padding: 5px; /* Adjusted for mobile view */
             text-align: center;
             border-radius: 8px;
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-            width: calc(33.333% - 30px);
+            width: calc(33.333% - 15px); /* Adjusted for mobile view */
             transition: transform 0.3s, box-shadow 0.3s;
         }
         .product:hover {
@@ -192,11 +191,11 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
         .product img {
-            width: 100px;
-            height: 100px;
+            width: 80px; /* Adjusted for mobile view */
+            height: 80px; /* Adjusted for mobile view */
             object-fit: cover;
             border-radius: 5px;
-            margin-bottom: 10px;
+            margin-bottom: 5px; /* Adjusted for mobile view */
         }
         .font-blocks {
             display: flex;
@@ -207,10 +206,10 @@
         .font-block {
             background-color: #4a90e2;
             color: white;
-            padding: 15px;
+            padding: 10px; /* Adjusted for mobile view */
             border-radius: 8px;
             text-align: center;
-            width: 23%; /* Adjust width for four blocks */
+            width: 20%; /* Adjust width for smaller screens */
             transition: background-color 0.3s;
         }
         .font-block:hover {
@@ -232,7 +231,7 @@
         }
         .full-profile-photo img {
             width: auto;
-            height: 80%;
+            height: 70%; /* Adjusted for mobile view */
             max-width: 90%;
         }
         .close-photo {
@@ -259,10 +258,10 @@
         }
         .modal-content {
             background-color: white;
-            padding: 30px;
+            padding: 20px; /* Adjusted for mobile view */
             border-radius: 12px;
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
-            max-width: 400px;
+            max-width: 350px; /* Adjusted for mobile view */
             width: 90%;
         }
         .close-modal {
@@ -276,12 +275,12 @@
 
         @media (max-width: 768px) {
             .product {
-                width: calc(50% - 30px);
+                width: calc(50% - 15px); /* Adjusted for mobile view */
             }
         }
         @media (max-width: 480px) {
             .product {
-                width: 100%;
+                width: 100%; /* Adjusted for mobile view */
             }
             .font-block {
                 width: 48%; /* Adjust for smaller screens */
@@ -363,71 +362,72 @@
             </div>
         </div>
         
- <!-- Full Profile Photo Modal -->
-    <div class="full-profile-photo" id="full-profile-photo">
-        <span class="close-photo" onclick="closeFullPhoto()">✖️</span>
-        <img id="full-photo-image" src="profile-picture.jpg" alt="Full Profile Picture">
-    </div>
-
-    <!-- Customer Service Modal -->
-    <div class="customer-service-modal" id="customer-service-modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeCustomerService()">✖️</span>
-            <h2>Customer Service</h2>
-            <p>For any inquiries, please contact us at support@example.com or call us at (123) 456-7890.</p>
+        <!-- Full Profile Photo Modal -->
+        <div class="full-profile-photo" id="full-profile-photo">
+            <span class="close-photo" onclick="closeFullPhoto()">✖️</span>
+            <img id="full-photo-image" src="profile-picture.jpg" alt="Full Profile Picture">
         </div>
-    </div>
 
-    <script>
-        function createAccount(event) {
-            event.preventDefault(); // Prevent the form from submitting
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const password = document.getElementById('password').value;
+        <!-- Customer Service Modal -->
+        <div class="customer-service-modal" id="customer-service-modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeCustomerService()">✖️</span>
+                <h2>Customer Service</h2>
+                <p>For any inquiries, please contact us at support@example.com or call us at (123) 456-7890.</p>
+            </div>
+        </div>
 
-            // Update profile mockup
-            document.getElementById('profile-name').textContent = name;
-            document.getElementById('profile-phone').textContent = phone;
-            document.getElementById('display-name').textContent = name;
-            document.getElementById('display-phone').textContent = phone;
+        <script>
+            function createAccount(event) {
+                event.preventDefault(); // Prevent the form from submitting
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const password = document.getElementById('password').value;
 
-            // Show the profile mockup and hide the account form
-            document.getElementById('profile-mockup').style.display = 'block';
-            document.getElementById('account-form-container').style.display = 'none';
+                // Update profile mockup
+                document.getElementById('profile-name').textContent = name;
+                document.getElementById('profile-phone').textContent = phone;
+                document.getElementById('display-name').textContent = name;
+                document.getElementById('display-phone').textContent = phone;
 
-            // Show the tabs section
-            document.getElementById('tabs-section').style.display = 'flex';
-        }
+                // Show the profile mockup and hide the account form
+                document.getElementById('profile-mockup').style.display = 'block';
+                document.getElementById('account-form-container').style.display = 'none';
 
-        function showFullPhoto() {
-            document.getElementById('full-profile-photo').style.display = 'flex';
-        }
-
-        function closeFullPhoto() {
-            document.getElementById('full-profile-photo').style.display = 'none';
-        }
-
-        function updateProfilePhoto(event) {
-            const file = event.target.files[0];
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('profile-photo').src = e.target.result;
-                document.getElementById('full-photo-image').src = e.target.result; // Update full photo modal
-            };
-            if (file) {
-                reader.readAsDataURL(file);
+                // Show the tabs section
+                document.getElementById('tabs-section').style.display = 'flex';
             }
-        }
 
-        function showCustomerService() {
-            document.getElementById('customer-service-modal').style.display = 'flex';
-        }
+            function showFullPhoto() {
+                document.getElementById('full-profile-photo').style.display = 'flex';
+            }
 
-        function closeCustomerService() {
-            document.getElementById('customer-service-modal').style.display = 'none';
-        }
+            function closeFullPhoto() {
+                document.getElementById('full-profile-photo').style.display = 'none';
+            }
 
-        // Show the account form by default
-        document.getElementById('account-form-container').style.display = 'block';
-    </script>
+            function updateProfilePhoto(event) {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profile-photo').src = e.target.result;
+                    document.getElementById('full-photo-image').src = e.target.result; // Update full photo modal
+                };
+                if (file) {
+                    reader.readAsDataURL(file);
+                }
+            }
 
+            function showCustomerService() {
+                document.getElementById('customer-service-modal').style.display = 'flex';
+            }
+
+            function closeCustomerService() {
+                document.getElementById('customer-service-modal').style.display = 'none';
+            }
+
+            // Show the account form by default
+            document.getElementById('account-form-container').style.display = 'block';
+        </script>
+</body>
+</html>
