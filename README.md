@@ -430,5 +430,4 @@
         // Show the account form by default
         document.getElementById('account-form-container').style.display = 'block';
     </script>
-</body>
-</html>
+
