@@ -3,305 +3,465 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>9 Slot Reward Game</title>
+    <title>Create Work Account</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #4b79a1; /* Gradient background color */
-            background: linear-gradient(135deg, #4b79a1 0%, #283e51 100%);
-            color: #fff;
-            text-align: center;
-        }
-        .slot-machine {
-            width: 400px;
-            margin: 20px auto;
-            border: 5px solid #fff;
-            border-radius: 10px;
-            background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
-            padding: 20px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-        }
-        .reels {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .reel {
-            width: 100px;
-            height: 100px;
-            background-color: rgba(255, 255, 255, 0.1); /* Lighter transparent background */
-            border: 2px solid #fff;
-            border-radius: 5px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #ffafbd, #ffc3a0);
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 36px; /* Bigger symbols */
-            transition: transform 0.5s;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            transition: background-color 0.3s;
         }
-        .spin-button, .reset-button {
-            padding: 12px 25px;
-            font-size: 20px;
-            margin: 5px;
+        .form-container, .account-layout {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            display: none; /* Initially hidden */
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ff6f61;
+            font-size: 1.5em;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #f1f1f1;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus {
+            border-color: #ff6f61;
+            outline: none;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff6f61;
+            color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-size: 1em;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: background-color 0.3s;
         }
-        .spin-button {
-            background-color: #28a745;
-            color: #fff;
+        .form-group button:hover {
+            background-color: #ff3d3d;
         }
-        .spin-button:hover {
-            background-color: #218838;
-            transform: scale(1.05); /* Scale effect on hover */
+
+        /* Profile Header */
+        .profile-header {
+            position: relative;
+            background-color: #4a90e2;
+            margin-bottom: 20px;
+            color: white;
         }
-        .reset-button {
-            background-color: #dc3545;
-            color: #fff;
+        .cover-photo {
+            width: 100%;
+            height: 300px;
+            background-image: url('cover-photo.jpg');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 4px solid #0078d7;
         }
-        .reset-button:hover {
-            background-color: #c82333;
-            transform: scale(1.05); /* Scale effect on hover */
+        .profile-picture {
+            position: absolute;
+            bottom: -75px;
+            left: 20px;
+            border: 5px solid white;
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer; /* Cursor changes to pointer */
         }
-        .result {
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.2s;
+        }
+        .profile-picture:hover img {
+            transform: scale(1.1);
+        }
+        .profile-info {
+            padding: 20px;
+            margin-top: 60px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .profile-info h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .profile-info p {
+            color: #666;
+            font-size: 16px;
+        }
+        .tabs {
+            display: flex;
+            justify-content: space-around;
             margin-top: 20px;
-            font-size: 24px; /* Increased font size */
-            display: none; /* Hide the result initially */
+            background-color: #fff;
+            padding: 10px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            display: none; /* Initially hidden */
         }
-        .total-wins, .account-balance {
+        .tabs a {
+            text-decoration: none;
+            color: #4a90e2;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 2px solid transparent;
+            transition: background-color 0.3s, color 0.3s, border 0.3s;
+        }
+        .tabs a:hover {
+            background-color: #e1f5fe;
+            border: 2px solid #4a90e2;
+            color: #004d40;
+            border-radius: 5px;
+        }
+        .profile-details {
             margin-top: 20px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .profile-details div {
+            margin-bottom: 10px;
+        }
+        .profile-details div span {
+            font-weight: bold;
+            color: #333;
+        }
+        .products-section {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .products-section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #4a90e2;
+        }
+        .product-grid {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .product {
+            background-color: #f7f7f7;
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+            width: calc(33.333% - 30px);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .product img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .font-blocks {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding: 10px 0;
+        }
+        .font-block {
+            background-color: #4a90e2;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            width: 23%; /* Adjust width for four blocks */
+            transition: background-color 0.3s;
+        }
+        .font-block:hover {
+            background-color: #0078d7;
+        }
+
+        /* Full Profile Photo Modal */
+        .full-profile-photo {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .full-profile-photo img {
+            width: auto;
+            height: 80%;
+            max-width: 90%;
+        }
+        .close-photo {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            cursor: pointer;
             font-size: 24px;
         }
-        .payout-table {
-            margin-top: 20px;
-            border-collapse: collapse;
+
+        /* Customer Service Modal */
+        .customer-service-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            color: #fff;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
         }
-        .payout-table th, .payout-table td {
-            border: 1px solid #fff;
-            padding: 8px;
-            text-align: center;
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 90%;
         }
-        .payout-table th {
-            background-color: rgba(255, 255, 255, 0.3); /* Light background for headers */
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #ff6f61;
+            cursor: pointer;
+            font-size: 24px;
         }
-        .winning-history {
-            margin-top: 20px;
-            text-align: left;
-            color: #fff;
+
+        @media (max-width: 768px) {
+            .product {
+                width: calc(50% - 30px);
+            }
         }
-        .loss {
-            background-color: rgba(255, 0, 0, 0.7); /* Red background for loss */
-            color: black;
+        @media (max-width: 480px) {
+            .product {
+                width: 100%;
+            }
+            .font-block {
+                width: 48%; /* Adjust for smaller screens */
+            }
         }
     </style>
 </head>
 <body>
-    <h1>9 Slot Reward Game</h1>
-    <div class="bet-container">
-        <label for="betAmount">Bet Amount: </label>
-        <input type="number" id="betAmount" value="10" min="1" style="padding: 8px; font-size: 18px;">
+
+    <!-- Account Creation Form -->
+    <div class="form-container" id="account-form-container">
+        <h2>🛍️ Welcome to the A-Nyar Shopping Platform! 🛍️</h2>
+        <form id="account-form" onsubmit="return createAccount(event);">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Create a password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Create Work Account</button>
+            </div>
+        </form>
     </div>
 
-    <div class="account-balance" id="accountBalance">Account Balance: 100</div> <!-- Account balance display -->
-
-    <div class="slot-machine">
-        <h2>Slot Machine</h2>
-        <div class="reels" id="reels">
-            <div class="reel" id="reel1">🍒</div>
-            <div class="reel" id="reel2">🍒</div>
-            <div class="reel" id="reel3">🍒</div>
-            <div class="reel" id="reel4">🍒</div>
-            <div class="reel" id="reel5">🍒</div>
-            <div class="reel" id="reel6">🍒</div>
-            <div class="reel" id="reel7">🍒</div>
-            <div class="reel" id="reel8">🍒</div>
-            <div class="reel" id="reel9">🍒</div>
+    <!-- Profile Mockup -->
+    <div class="account-layout" id="profile-mockup">
+        <div class="profile-header">
+            <div class="cover-photo"></div>
+            <div class="profile-picture" onclick="document.getElementById('profile-photo-input').click();">
+                <img id="profile-photo" src="profile-picture.jpg" alt="Profile Picture" onclick="showFullPhoto()">
+            </div>
+            <input type="file" id="profile-photo-input" accept="image/*" style="display: none;" onchange="updateProfilePhoto(event)">
         </div>
-        <div class="result" id="result"></div>
+        <div class="profile-info">
+            <h1 id="profile-name">John Doe</h1>
+            <p id="profile-phone">123-456-7890</p>
+        </div>
+        <!-- Tabs Section (Initially Hidden) -->
+        <div class="tabs" id="tabs-section">
+            <a href="#home">Home</a>
+            <a href="#customer-service" onclick="showCustomerService()">Customer Service</a>
+            <a href="#profile">Profile</a>
+            <a href="#tasks">Tasks</a>
+        </div>
+        <div class="profile-details">
+            <h2>Profile Details</h2>
+            <div>
+                <span>Name:</span> <span id="display-name">John Doe</span>
+            </div>
+            <div>
+                <span>Phone:</span> <span id="display-phone">123-456-7890</span>
+            </div>
+        </div>
+        <div class="products-section">
+            <h2>Products</h2>
+            <div class="product-grid">
+                <div class="product">
+                    <img src="https://peazxcv.com/api//file/cfg/202410/10/3ab9104a36224950a46c5168e8035915_.png" alt="Product 1">
+                    <h3>Product 1</h3>
+                    <p>$10.00</p>
+                </div>
+                <div class="product">
+                    <img src="https://peazxcv.com/api//file/cfg/202410/10/2756ce8ac2514a55b0dc92bfc2378610_.png" alt="Product 2">
+                    <h3>Product 2</h3>
+                    <p>$15.00</p>
+                </div>
+                <div class="product">
+                    <img src="https://peazxcv.com/api//file/cfg/202410/10/fa0f5bd1885d4102a53658cc85f7a256_.png" alt="Product 3">
+                    <h3>Product 3</h3>
+                    <p>$20.00</p>
+                </div>
+            </div>
+        </div>
+<div class="product-grid">
+    <div class="product">
+        <img src="https://peazxcv.com/api//file/cfg/202410/10/3ab9104a36224950a46c5168e8035915_.png" alt="Stylish Backpack">
+        <h3>Stylish Backpack</h3>
+        <p>$10.00</p>
+    </div>
+    <div class="product">
+        <img src="https://peazxcv.com/api//file/cfg/202410/10/2756ce8ac2514a55b0dc92bfc2378610_.png" alt="Wireless Headphones">
+        <h3>Wireless Headphones</h3>
+        <p>$15.00</p>
+    </div>
+    <div class="product">
+        <img src="https://peazxcv.com/api//file/cfg/202410/10/fa0f5bd1885d4102a53658cc85f7a256_.png" alt="Smartwatch">
+        <h3>Smartwatch</h3>
+        <p>$20.00</p>
+    </div>
+    <div class="product">
+        <img src="https://peazxcv.com/api//file/cfg/202410/10/4bc709a8cfae465a809a467497036969_.jpg" alt="Product 4">
+        <h3>Product 4</h3>
+        <p>$25.00</p>
+    </div>
+    <div class="product">
+        <img src="https://peazxcv.com/api//file/cfg/202410/10/4bc709a8cfae465a809a467497036969_.jpg" alt="Product 5">
+        <h3>Product 5</h3>
+        <p>$30.00</p>
+    </div>
+    <div class="product">
+        <img src="https://peazxcv.com/api//file/cfg/202410/10/b322df5d5ed44cefabda47ce18ea802d_.png" alt="Product 6">
+        <h3>Product 6</h3>
+        <p>$35.00</p>
+    </div>
+</div>
+
+        
+ <!-- Full Profile Photo Modal -->
+    <div class="full-profile-photo" id="full-profile-photo">
+        <span class="close-photo" onclick="closeFullPhoto()">✖️</span>
+        <img id="full-photo-image" src="profile-picture.jpg" alt="Full Profile Picture">
     </div>
 
-    <button class="spin-button" onclick="spin()">Spin!</button>
-    <button class="reset-button" onclick="reset()">Reset</button>
-    
-    <div class="total-wins" id="totalWins">Total Wins: 0</div>
-
-    <h2>Payout Table</h2>
-    <table class="payout-table" id="payoutTable">
-        <tr>
-            <th>Combination</th>
-            <th>Payout</th>
-        </tr>
-        <tr>
-            <td>3 🍒</td>
-            <td>5x</td> <!-- Reduced payout -->
-        </tr>
-        <tr>
-            <td>2 🍒</td>
-            <td>1x</td> <!-- Reduced payout -->
-        </tr>
-        <tr>
-            <td>3 🍋</td>
-            <td>6x</td>
-        </tr>
-        <tr>
-            <td>3 🍊</td>
-            <td>4x</td> <!-- Reduced payout -->
-        </tr>
-        <tr>
-            <td>3 🍉</td>
-            <td>3x</td> <!-- Reduced payout -->
-        </tr>
-        <tr>
-            <td>3 ⭐</td>
-            <td>15x</td>
-        </tr>
-        <tr>
-            <td>3 🍀</td>
-            <td>10x</td>
-        </tr>
-        <tr>
-            <td>3 💰</td>
-            <td>30x</td>
-        </tr>
-    </table>
-
-    <div class="winning-history" id="winningHistory"></div>
-
-    <audio id="spinSound" src="spin-sound.mp3"></audio>
-    <audio id="winSound" src="win-sound.mp3"></audio>
+    <!-- Customer Service Modal -->
+    <div class="customer-service-modal" id="customer-service-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeCustomerService()">✖️</span>
+            <h2>Customer Service</h2>
+            <p>For any inquiries, please contact us at support@example.com or call us at (123) 456-7890.</p>
+        </div>
+    </div>
 
     <script>
-        let totalWins = 0;
-        let winningHistory = [];
-        let accountBalance = 100; // Initial account balance
-        let spinCount = 0; // Track the number of spins
+        function createAccount(event) {
+            event.preventDefault(); // Prevent the form from submitting
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
 
-        function spin() {
-            const betAmount = parseInt(document.getElementById('betAmount').value);
+            // Update profile mockup
+            document.getElementById('profile-name').textContent = name;
+            document.getElementById('profile-phone').textContent = phone;
+            document.getElementById('display-name').textContent = name;
+            document.getElementById('display-phone').textContent = phone;
 
-            // Check if the bet amount is valid
-            if (betAmount > accountBalance) {
-                alert("Insufficient balance! Please reduce your bet amount.");
-                return;
-            }
+            // Show the profile mockup and hide the account form
+            document.getElementById('profile-mockup').style.display = 'block';
+            document.getElementById('account-form-container').style.display = 'none';
 
-            // Check for special case of total bet amount
-            if (totalWins >= 1000) {
-                accountBalance -= 1100; // Deduct 1100 for total bet amount of 1000
-                document.getElementById('result').textContent = `You lost: $1100 (Total Bet: $1000)`;
-            } else {
-                accountBalance -= betAmount; // Deduct normal bet amount
-            }
-
-            document.getElementById('accountBalance').textContent = `Account Balance: ${accountBalance}`;
-
-            const symbols = ['🍒', '🍋', '🍊', '🍉', '⭐', '🍀', '💰'];
-            const results = [];
-
-            for (let i = 1; i <= 9; i++) {
-                const symbol = weightedRandomSymbol(); // Use weighted random selection
-                document.getElementById(`reel${i}`).textContent = symbol;
-                results.push(symbol);
-            }
-
-            // Spin animation
-            for (let i = 1; i <= 9; i++) {
-                document.getElementById(`reel${i}`).style.transform = 'rotateY(360deg)';
-            }
-
-            // Play spin sound
-            document.getElementById('spinSound').play();
-
-            setTimeout(() => {
-                let winAmount = 0;
-                const symbolCounts = {};
-
-                // Count occurrences of each symbol
-                results.forEach(symbol => {
-                    symbolCounts[symbol] = (symbolCounts[symbol] || 0) + 1;
-                });
-
-                // Calculate winnings based on symbol counts
-                for (const [symbol, count] of Object.entries(symbolCounts)) {
-                    if (count >= 3) { // Winning combinations
-                        winAmount += getPayout(symbol) * betAmount;
-                    }
-                }
-
-                // Determine win/lose outcome based on adjusted chances
-                if (Math.random() <= 0.45) { // 45% chance to win
-                    accountBalance += winAmount; // Update account balance
-                    totalWins += winAmount; // Update total wins
-                    winningHistory.push(`Won: $${winAmount}`); // Update winning history
-                    document.getElementById('winSound').play(); // Play win sound
-                    document.getElementById('result').textContent = `You won: $${winAmount}`;
-                } else {
-                    // Losing scenario
-                    document.getElementById('result').textContent = `You lost: $${betAmount}`;
-                    winningHistory.push(`Lost: $${betAmount}`); // Update winning history
-                }
-
-                // Update account balance display
-                document.getElementById('accountBalance').textContent = `Account Balance: ${accountBalance}`;
-                
-                // Update history display
-                document.getElementById('winningHistory').innerHTML = winningHistory.join('<br>');
-                document.getElementById('totalWins').textContent = `Total Wins: ${totalWins}`;
-                document.getElementById('result').style.display = 'block'; // Show the result
-            }, 2000); // Delay result display for 2 seconds
+            // Show the tabs section
+            document.getElementById('tabs-section').style.display = 'flex';
         }
 
-        function weightedRandomSymbol() {
-            const symbols = ['🍒', '🍋', '🍊', '🍉', '⭐', '🍀', '💰'];
-            const weights = [10, 10, 10, 10, 2, 2, 1]; // Adjust weights here
-            const totalWeight = weights.reduce((acc, weight) => acc + weight, 0);
-            const randomNum = Math.random() * totalWeight;
+        function showFullPhoto() {
+            document.getElementById('full-profile-photo').style.display = 'flex';
+        }
 
-            let weightSum = 0;
-            for (let i = 0; i < symbols.length; i++) {
-                weightSum += weights[i];
-                if (randomNum <= weightSum) {
-                    return symbols[i];
-                }
+        function closeFullPhoto() {
+            document.getElementById('full-profile-photo').style.display = 'none';
+        }
+
+        function updateProfilePhoto(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('profile-photo').src = e.target.result;
+                document.getElementById('full-photo-image').src = e.target.result; // Update full photo modal
+            };
+            if (file) {
+                reader.readAsDataURL(file);
             }
         }
 
-        function reset() {
-            totalWins = 0;
-            accountBalance = 100; // Reset balance to initial value
-            winningHistory = [];
-            document.getElementById('accountBalance').textContent = `Account Balance: ${accountBalance}`;
-            document.getElementById('winningHistory').innerHTML = ''; // Clear winning history
-            document.getElementById('totalWins').textContent = `Total Wins: ${totalWins}`;
-            document.getElementById('result').style.display = 'none'; // Hide the result
-            for (let i = 1; i <= 9; i++) {
-                document.getElementById(`reel${i}`).textContent = '🍒'; // Reset reels to initial state
-            }
+        function showCustomerService() {
+            document.getElementById('customer-service-modal').style.display = 'flex';
         }
 
-        function getPayout(symbol) {
-            switch (symbol) {
-                case '🍒':
-                    return 5; // Reduced payout
-                case '🍋':
-                    return 6;
-                case '🍊':
-                    return 4; // Reduced payout
-                case '🍉':
-                    return 3; // Reduced payout
-                case '⭐':
-                    return 15;
-                case '🍀':
-                    return 10;
-                case '💰':
-                    return 30;
-                default:
-                    return 0;
-            }
+        function closeCustomerService() {
+            document.getElementById('customer-service-modal').style.display = 'none';
         }
+
+        // Show the account form by default
+        document.getElementById('account-form-container').style.display = 'block';
     </script>
 </body>
 </html>
