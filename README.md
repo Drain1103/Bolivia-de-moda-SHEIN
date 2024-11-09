@@ -1,324 +1,197 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Work Account</title>
+    <title>Sobre SHEIN - E-Commerce Global de Moda</title>
     <style>
+        /* General Body Styles */
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #e8f0fe, #f1f8e9);
+            background: linear-gradient(to right, #f7b7d7, #f0b7c6); /* Soft pink gradient background */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 2px solid #f4b2b2;
+        }
+
+        header .logo img {
+            height: 120px; /* Increased size of the logo */
+        }
+
+        header .navbar {
+            display: flex;
+            gap: 30px;
+            list-style-type: none;
             margin: 0;
             padding: 0;
         }
-        header {
-            background-color: #4a90e2;
+
+        header .navbar li {
+            font-size: 1.2em;
+            padding: 10px;
+            background-color: #ff7eb9;
             color: white;
-            padding: 15px 20px;
-            text-align: center;
-            font-size: 1.5em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 20px;
-            flex-wrap: wrap;
+
+        header .navbar li:hover {
+            background-color: #ff5a8f;
         }
-        .form-container, .account-layout {
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 400px;
+
+        /* Search Bar Hidden */
+        .search-bar {
+            display: none; /* Hide the search bar */
+        }
+
+        /* Main Section Styles */
+        .main-section {
             padding: 30px;
-            margin: 20px;
-        }
-        h2, h3, h4 {
-            text-align: center;
-            color: #4a90e2;
-        }
-        .form-group, .cart-item, .review {
-            margin-bottom: 15px;
-        }
-        .form-group label, .product-category label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-        }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #e1e1e1;
-            border-radius: 5px;
-            font-size: 1em;
-            transition: border-color 0.3s;
-        }
-        .form-group input:focus {
-            border-color: #4a90e2;
-            outline: none;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #4a90e2;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #357ab8;
-        }
-        .product {
-            background-color: #f9f9f9;
-            border: 1px solid #e1e1e1;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            margin: 10px;
-            flex: 1 1 calc(30% - 20px);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
-        }
-        .product:hover {
-            transform: scale(1.03);
-        }
-        .product img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-        .chat-support, .order-tracking, .cart {
-            background-color: #f9f9f9;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin: 20px 0;
-        }
-        #chat-log {
-            max-height: 200px;
-            overflow-y: auto;
-            margin-top: 10px;
-            background-color: #fff;
-            border: 1px solid #e1e1e1;
-            border-radius: 5px;
-            padding: 10px;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
-            padding-top: 60px;
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
+            background: #fff;
+            margin: 20px auto;
             border-radius: 10px;
+            width: 90%;
+            max-width: 1000px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(to right, #fff7f0, #ffe4e1);
         }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
+
+        .main-section h1 {
+            color: #ff5a8f;
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 20px;
         }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
+
+        .main-section p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 20px;
         }
+
+        .main-section ul {
+            font-size: 1.1em;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .main-section ul li {
+            margin-bottom: 15px;
+            list-style-type: none;
+            padding-left: 20px;
+            background: url('https://img.icons8.com/ios/50/000000/long-arrow-right.png') no-repeat left center;
+            background-size: 20px;
+        }
+
+        /* Section Visibility */
+        .content-section {
+            display: none; /* Initially hidden */
+        }
+
+        .active {
+            display: block; /* Show active section */
+        }
+
     </style>
 </head>
 <body>
 
+<!-- Header with Logo, Search Bar, and Navbar -->
 <header>
-    🛍️ A-Nyar Shopping Platform 🛍️
+    <div class="logo">
+        <img src="https://cdn.techinasia.com/cloudinary/transformations/wp-content/uploads/2024/03/1711082850_98ea7479bdec87b2c3bb1e4da55dc956_v1711082850_large.webp" alt="Logo SHEIN">
+    </div>
+    <!-- Search bar is hidden now -->
+    <input class="search-bar" type="text" placeholder="Buscar información sobre SHEIN">
+    <ul class="navbar">
+        <li onclick="showSection('about')">Sobre SHEIN</li>
+        <li onclick="showSection('mission')">Misión</li>
+        <li onclick="showSection('global')">Presencia Global</li>
+        <li onclick="showSection('products')">Productos</li>
+        <li onclick="showSection('impact')">Impacto</li>
+        <li onclick="showSection('sustainability')">Sostenibilidad</li>
+        <li onclick="showSection('careers')">Carreras</li>
+    </ul>
 </header>
 
-<div class="container">
-    <!-- Account Creation Form -->
-    <div class="form-container" id="account-form-container">
-        <h2>Create Your Account</h2>
-        <form id="account-form" onsubmit="return createAccount(event);">
-            <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Create a password" required>
-            </div>
-            <button type="submit">Create Work Account</button>
-        </form>
+<!-- Main Section About SHEIN -->
+<div class="main-section">
+    <h1>Bienvenido a SHEIN</h1>
+
+    <!-- About SHEIN Section -->
+    <div id="about" class="content-section">
+        <p>SHEIN es una plataforma de comercio electrónico global líder que se especializa en moda y productos de estilo de vida. Conocida por ofrecer productos de moda asequibles, modernos y de alta calidad, SHEIN se ha convertido en uno de los minoristas de moda en línea más grandes del mundo, sirviendo a millones de clientes en todo el mundo.</p>
     </div>
 
-    <!-- Profile Mockup -->
-    <div class="account-layout" id="profile-mockup" style="display: none;">
-        <h2>Welcome, <span id="profile-name">John Doe</span>!</h2>
-        <p id="profile-phone">Phone: 123-456-7890</p>
-
-        <!-- Search Bar -->
-        <div class="form-group">
-            <input type="text" id="search" placeholder="Search products..." oninput="searchProducts()">
-        </div>
-
-        <h3>Product Categories</h3>
-        <div class="product-category">
-            <label>Category 1</label>
-            <div class="product" onclick="openModal('Product 1 Details', 'Description of Product 1.')">
-                <img src="https://img.ltwebstatic.com/images3_spmp/2023/07/27/169044806227147be7a5fca57929c075e58c9ed112_thumbnail_336x.jpg" alt="Product 1">
-                <h4>Product 1</h4>
-                <p>$10.00</p>
-                <button onclick="addToCart('Product 1', 10)">Add to Cart</button>
-            </div>
-        </div>
-        <div class="product-category">
-            <label>Category 2</label>
-            <div class="product" onclick="openModal('Product 2 Details', 'Description of Product 2.')">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnTvo6xNxvNh8ZARdTL5fRn30Z1RHwlFEfRg&s" alt="Product 2">
-                <h4>Product 2</h4>
-                <p>$15.00</p>
-                <button onclick="addToCart('Product 2', 15)">Add to Cart</button>
-            </div>
-        </div>
-        <div class="product-category">
-            <label>Category 3</label>
-            <div class="product" onclick="openModal('Product 3 Details', 'Description of Product 3.')">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdE29Ddw7Rc9SIv4MffPMknnYwCDIEKXRruQ&s" alt="Product 3">
-                <h4>Product 3</h4>
-                <p>$20.00</p>
-                <button onclick="addToCart('Product 3', 20)">Add to Cart</button>
-            </div>
-        </div>
-
-        <!-- Cart Section -->
-        <div class="cart">
-            <h3>Shopping Cart</h3>
-            <div id="cart-items"></div>
-            <button onclick="checkout()">Checkout</button>
-        </div>
-
-        <!-- Review Section -->
-        <div class="product-reviews">
-            <h3>Leave a Review</h3>
-            <textarea id="review-text" placeholder="Write your review here..."></textarea>
-            <button onclick="submitReview()">Submit Review</button>
-            <h4>Reviews:</h4>
-            <div id="reviews"></div>
-        </div>
-
-        <!-- Chat Support -->
-        <div class="chat-support">
-            <h3>Chat Support</h3>
-            <div id="chat-log"></div>
-            <input type="text" id="chat-input" placeholder="Type your message...">
-            <button onclick="sendMessage()">Send</button>
-        </div>
-
-        <!-- Order Tracking -->
-        <div class="order-tracking">
-            <h3>Order Status</h3>
-            <p>Your last order status: <strong>Shipped</strong></p>
-        </div>
-
-        <!-- Contact Button -->
-        <div style="text-align: center; margin: 20px;">
-            <a href="https://m.me/drai1102" target="_blank" style="padding: 10px 20px; background-color: #4a90e2; color: white; text-decoration: none; border-radius: 5px;">Contact Us on Messenger</a>
-        </div>
+    <!-- Mission Section -->
+    <div id="mission" class="content-section">
+        <h2>Misión y Valores:</h2>
+        <p>La misión de SHEIN es hacer que la moda sea accesible para todos, ofreciendo productos de alta calidad y de moda a precios asequibles. La empresa valora la inclusividad, la sostenibilidad y la responsabilidad social. SHEIN está comprometida a reducir su impacto ambiental mediante prácticas sostenibles y una fuente ética de materiales.</p>
     </div>
 
-    <!-- Modal for Product Details -->
-    <div id="product-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="modal-title"></h2>
-            <p id="modal-description"></p>
-        </div>
+    <!-- Global Presence Section -->
+    <div id="global" class="content-section">
+        <h2>Presencia Global:</h2>
+        <p>SHEIN opera en más de 150 países en todo el mundo, llevando la moda directamente a tu puerta. Con almacenes dedicados en mercados clave y una infraestructura de comercio electrónico robusta, SHEIN garantiza que los clientes de diferentes partes del mundo tengan acceso a sus últimos estilos y colecciones exclusivas.</p>
     </div>
+
+    <!-- Products Section -->
+    <div id="products" class="content-section">
+        <h2>Características Clave de los Productos de SHEIN:</h2>
+        <ul>
+            <li><strong>Alcance Global:</strong> SHEIN ofrece una amplia variedad de productos enviados globalmente.</li>
+            <li><strong>Precios Asequibles:</strong> Artículos modernos y elegantes a precios competitivos.</li>
+            <li><strong>Tamaños Inclusivos:</strong> SHEIN se adapta a una variedad de tamaños para todos los tipos de cuerpo.</li>
+            <li><strong>Compras Personalizadas:</strong> Recibe recomendaciones basadas en el comportamiento de compra.</li>
+        </ul>
+    </div>
+
+    <!-- Impact Section -->
+    <div id="impact" class="content-section">
+        <h2>Impacto y Sostenibilidad:</h2>
+        <p>SHEIN está comprometido con la sostenibilidad y se esfuerza por hacer un impacto positivo en el medio ambiente. La empresa ha introducido diversas iniciativas para reducir su huella de carbono, incluyendo envases ecológicos y el uso de materiales reciclados. SHEIN también apoya diversas organizaciones benéficas e iniciativas comunitarias a nivel mundial.</p>
+    </div>
+
+    <!-- Sustainability Section -->
+    <div id="sustainability" class="content-section">
+        <h2>Esfuerzos de Sostenibilidad:</h2>
+        <p>SHEIN se enfoca en reducir su huella ambiental. A través de iniciativas como el uso de materiales sostenibles, la mejora de los procesos de producción y la oferta de empaques ecológicos, SHEIN está contribuyendo activamente a la lucha contra el cambio climático.</p>
+    </div>
+
+    <!-- Careers Section -->
+    <div id="careers" class="content-section">
+        <h2>Carreras en SHEIN:</h2>
+        <p>SHEIN ofrece diversas oportunidades de carrera en campos diversos. Únete a un equipo que prospera en innovación y creatividad. Si estás buscando una carrera emocionante en tecnología de moda, comercio electrónico o marketing, SHEIN podría ser el lugar para ti.</p>
+    </div>
+
 </div>
 
 <script>
-    function createAccount(event) {
-        event.preventDefault();
-        const name = document.getElementById('name').value;
-        const phone = document.getElementById('phone').value;
-        document.getElementById('profile-name').textContent = name;
-        document.getElementById('profile-phone').textContent = 'Phone: ' + phone;
-        document.getElementById('account-form-container').style.display = 'none';
-        document.getElementById('profile-mockup').style.display = 'block';
-    }
-
-    function openModal(title, description) {
-        document.getElementById('modal-title').textContent = title;
-        document.getElementById('modal-description').textContent = description;
-        document.getElementById('product-modal').style.display = 'block';
-    }
-
-    function closeModal() {
-        document.getElementById('product-modal').style.display = 'none';
-    }
-
-    function addToCart(productName, price) {
-        const cartItems = document.getElementById('cart-items');
-        const item = document.createElement('div');
-        item.className = 'cart-item';
-        item.textContent = `${productName} - $${price}`;
-        cartItems.appendChild(item);
-    }
-
-    function checkout() {
-        alert('Proceeding to checkout!');
-    }
-
-    function submitReview() {
-        const reviewText = document.getElementById('review-text').value;
-        if (reviewText) {
-            const reviewsSection = document.getElementById('reviews');
-            const review = document.createElement('div');
-            review.className = 'review';
-            review.innerHTML = `<p><strong>You:</strong> ⭐⭐⭐⭐ - "${reviewText}"</p>`;
-            reviewsSection.appendChild(review);
-            document.getElementById('review-text').value = ''; // Clear the input
-        }
-    }
-
-    function sendMessage() {
-        const chatInput = document.getElementById('chat-input').value;
-        if (chatInput) {
-            const chatLog = document.getElementById('chat-log');
-            const message = document.createElement('div');
-            message.textContent = `User: ${chatInput}`;
-            chatLog.appendChild(message);
-            document.getElementById('chat-input').value = ''; // Clear the input
-        }
-    }
-
-    function searchProducts() {
-        const query = document.getElementById('search').value.toLowerCase();
-        const products = document.querySelectorAll('.product');
-        products.forEach(product => {
-            const name = product.querySelector('h4').textContent.toLowerCase();
-            product.style.display = name.includes(query) ? 'block' : 'none';
+    // Function to show the selected section
+    function showSection(sectionId) {
+        // Hide all sections
+        var sections = document.querySelectorAll('.content-section');
+        sections.forEach(function(section) {
+            section.classList.remove('active');
         });
-    }
 
-    document.getElementById('account-form-container').style.display = 'block';
+        // Show the selected section
+        var selectedSection = document.getElementById(sectionId);
+        selectedSection.classList.add('active');
+    }
 </script>
 
 </body>
