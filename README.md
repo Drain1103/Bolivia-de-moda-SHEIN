@@ -19,8 +19,6 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      line-height: 1.6;
-      color: #333;
     }
 
     .auth-container {
@@ -37,14 +35,8 @@
     }
 
     @keyframes scaleIn {
-      0% {
-        transform: scale(0.95);
-        opacity: 0;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
+      0% { transform: scale(0.95); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     .auth-form-container {
@@ -61,10 +53,10 @@
       font-size: 16px;
       border: 2px solid #ddd;
       border-radius: 8px;
-      transition: all 0.3s ease;
-      outline: none;
       background-color: #f9f9f9;
       margin-bottom: 15px;
+      transition: all 0.3s ease;
+      outline: none;
     }
 
     input:focus {
@@ -99,7 +91,6 @@
       color: #ff6a00;
       font-weight: bold;
       cursor: pointer;
-      text-decoration: underline;
     }
 
     .sign-up-container {
@@ -188,7 +179,7 @@
       }
 
       if (password.length < 3) {
-        errorMessage.textContent = "Password must be at least 3 characters.";
+        errorMessage.textContent = "Password must be at least 3 characters long.";
         return;
       }
 
@@ -198,10 +189,8 @@
       }
 
       errorMessage.textContent = "";
-      setTimeout(() => {
-        alert("Sign In Successful!");
-        window.location.href = "https://drain1103.github.io/Welcome-My-Page./";
-      }, 2000);
+      // Redirect directly without alert
+      window.location.href = "https://drain1103.github.io/Welcome-My-Page./";
     });
 
     document.getElementById("signUpForm").addEventListener("submit", function(event) {
@@ -224,7 +213,7 @@
       }
 
       if (password.length < 3) {
-        errorMessage.textContent = "Password must be at least 3 characters.";
+        errorMessage.textContent = "Password must be at least 3 characters long.";
         return;
       }
 
@@ -235,7 +224,6 @@
 
       errorMessage.textContent = "";
       setTimeout(() => {
-        alert("Sign Up Successful!");
         window.location.href = "https://drain1103.github.io/Welcome-My-Page./";
       }, 2000);
     });
