@@ -3,350 +3,673 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work Account Portal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Work Account System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #1a365d;
-            --secondary-color: #2a4365;
-            --accent-color: #3182ce;
-            --text-color: #2d3748;
-            --text-light: #718096;
-            --bg-color: #f7fafc;
-            --card-bg: #ffffff;
-            --border-color: #e2e8f0;
-            --error-color: #e53e3e;
-            --success-color: #38a169;
-        }
-
-        .dark-mode {
-            --primary-color: #2d3748;
-            --secondary-color: #1a202c;
-            --accent-color: #4299e1;
-            --text-color: #e2e8f0;
-            --text-light: #a0aec0;
-            --bg-color: #1a202c;
-            --card-bg: #2d3748;
-            --border-color: #4a5568;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: background-color 0.3s, color 0.3s;
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --success-color: #4cc9f0;
+            --danger-color: #f72585;
+            --warning-color: #f8961e;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --gray-color: #6c757d;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fb;
+            color: var(--dark-color);
+            transition: var(--transition);
+        }
+
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .card {
+            background-color: #1e1e1e;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .dark-mode input, 
+        .dark-mode .form-select {
+            background-color: #2d2d2d;
+            color: #e0e0e0;
+            border-color: #444;
+        }
+
+        .dark-mode .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .dark-mode .btn-outline-secondary {
+            color: #e0e0e0;
+            border-color: #444;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .auth-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 1rem;
+            min-height: 100vh;
+            padding: 20px;
         }
 
-        .container {
-            width: 100%;
-            max-width: 420px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-            padding: 2rem;
-            width: 100%;
-            margin-bottom: 1.5rem;
-        }
-
-        .logo-container {
+        .auth-tabs {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 400px;
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .auth-tab.active {
+            border-bottom: 2px solid var(--primary-color);
             color: var(--primary-color);
         }
 
-        .mode-toggle {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            color: var(--text-light);
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-
-        .tabs {
-            display: flex;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .tab {
-            flex: 1;
-            text-align: center;
-            padding: 0.75rem;
-            cursor: pointer;
-            font-weight: 500;
-            color: var(--text-light);
-            position: relative;
-        }
-
-        .tab.active {
-            color: var(--accent-color);
-        }
-
-        .tab.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
+        .auth-form {
             width: 100%;
-            height: 2px;
-            background-color: var(--accent-color);
+            max-width: 400px;
         }
 
         .form-group {
-            margin-bottom: 1.25rem;
+            margin-bottom: 20px;
         }
 
         .form-label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 8px;
             font-weight: 500;
-            color: var(--text-color);
         }
 
-        .input-group {
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .password-container {
             position: relative;
         }
 
-        .form-input {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1rem;
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            transition: border-color 0.3s;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
-        }
-
-        .form-input.error {
-            border-color: var(--error-color);
-        }
-
-        .input-icon {
+        .password-toggle {
             position: absolute;
-            right: 1rem;
+            right: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-light);
             cursor: pointer;
-        }
-
-        .password-strength {
-            height: 4px;
-            width: 100%;
-            background-color: var(--border-color);
-            margin-top: 0.5rem;
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .password-strength-meter {
-            height: 100%;
-            width: 0;
-            background-color: var(--error-color);
-            transition: width 0.3s, background-color 0.3s;
-        }
-
-        .password-strength-text {
-            font-size: 0.75rem;
-            margin-top: 0.25rem;
-            color: var(--text-light);
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .checkbox {
-            margin-right: 0.5rem;
-            cursor: pointer;
-        }
-
-        .checkbox-label {
-            font-size: 0.875rem;
-            color: var(--text-light);
-            cursor: pointer;
+            color: var(--gray-color);
         }
 
         .btn {
-            display: block;
-            width: 100%;
-            padding: 0.75rem;
-            background-color: var(--accent-color);
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: var(--primary-color);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 500;
+            border-radius: var(--border-radius);
             cursor: pointer;
-            transition: background-color 0.3s;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            transition: var(--transition);
+            width: 100%;
         }
 
         .btn:hover {
             background-color: var(--secondary-color);
+            transform: translateY(-2px);
         }
 
-        .btn:disabled {
-            background-color: var(--text-light);
-            cursor: not-allowed;
+        .btn-outline-secondary {
+            background-color: transparent;
+            border: 1px solid var(--gray-color);
+            color: var(--gray-color);
         }
 
-        .error-message {
-            color: var(--error-color);
-            font-size: 0.75rem;
-            margin-top: 0.25rem;
-            display: none;
+        .btn-outline-secondary:hover {
+            background-color: var(--gray-color);
+            color: white;
         }
 
-        .error-message.visible {
-            display: block;
+        .form-check {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .form-check-input {
+            margin-right: 10px;
+        }
+
+        .form-check-label {
+            margin-bottom: 0;
+        }
+
+        .forgot-password {
+            text-align: right;
+            font-size: 14px;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
         }
 
         .notification {
             position: fixed;
-            top: 1rem;
-            right: 1rem;
-            padding: 1rem;
-            border-radius: 8px;
-            background-color: var(--success-color);
-            color: white;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            transform: translateX(120%);
-            transition: transform 0.3s;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            background-color: white;
+            box-shadow: var(--box-shadow);
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
             z-index: 1000;
+            display: flex;
+            align-items: center;
         }
 
         .notification.show {
             transform: translateX(0);
         }
 
-        .notification.error {
-            background-color: var(--error-color);
+        .notification.success {
+            border-left: 4px solid var(--success-color);
         }
 
-        @media (max-width: 480px) {
-            .card {
-                padding: 1.5rem;
+        .notification.error {
+            border-left: 4px solid var(--danger-color);
+        }
+
+        .notification-icon {
+            margin-right: 15px;
+            font-size: 20px;
+        }
+
+        .notification.success .notification-icon {
+            color: var(--success-color);
+        }
+
+        .notification.error .notification-icon {
+            color: var(--danger-color);
+        }
+
+        .admin-container {
+            display: none;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .admin-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        th:hover {
+            background-color: #e9ecef;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .dark-mode th {
+            background-color: #2d2d2d;
+        }
+
+        .dark-mode tr:hover {
+            background-color: #2d2d2d;
+        }
+
+        .duplicate {
+            background-color: rgba(247, 37, 133, 0.1);
+        }
+
+        .dark-mode .duplicate {
+            background-color: rgba(247, 37, 133, 0.2);
+        }
+
+        .password-cell {
+            position: relative;
+        }
+
+        .password-value {
+            max-width: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .stats-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            flex: 1;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            background-color: white;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .stat-card p {
+            color: var(--gray-color);
+            margin: 0;
+        }
+
+        .dark-mode .stat-card {
+            background-color: #1e1e1e;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .admin-login {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .admin-login-form {
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .admin-login-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .toggle-label {
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .action-cell {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--gray-color);
+            transition: var(--transition);
+        }
+
+        .btn-icon:hover {
+            color: var(--danger-color);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .auth-tabs {
+                width: 100%;
+            }
+            
+            .auth-form {
+                width: 100%;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+            }
+            
+            .admin-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .admin-actions {
+                width: 100%;
+            }
+            
+            .btn {
+                padding: 10px 15px;
             }
         }
     </style>
 </head>
 <body>
-    <button class="mode-toggle" id="modeToggle">
-        <i class="fas fa-moon"></i>
-    </button>
-
-    <div class="container">
-        <div class="card">
-            <div class="logo-container">
-                <div class="logo">WorkPortal</div>
-            </div>
-
-            <div class="tabs">
-                <div class="tab active" id="signInTab">Sign In</div>
-                <div class="tab" id="signUpTab">Sign Up</div>
-            </div>
-
-            <form id="signInForm">
-                <div class="form-group">
-                    <label for="signInPhone" class="form-label">Phone Number</label>
-                    <div class="input-group">
-                        <input type="tel" id="signInPhone" class="form-input" placeholder="Enter your phone number" autocomplete="tel">
-                    </div>
-                    <div class="error-message" id="signInPhoneError">Please enter a valid phone number (10-15 digits)</div>
-                </div>
-
-                <div class="form-group">
-                    <label for="signInPassword" class="form-label">Password</label>
-                    <div class="input-group">
-                        <input type="password" id="signInPassword" class="form-input" placeholder="Enter 6-digit password" autocomplete="current-password">
-                        <i class="fas fa-eye input-icon" id="signInPasswordToggle"></i>
-                    </div>
-                    <div class="error-message" id="signInPasswordError">Password must be 6 digits</div>
-                </div>
-
-                <div class="checkbox-group">
-                    <input type="checkbox" id="rememberSignIn" class="checkbox">
-                    <label for="rememberSignIn" class="checkbox-label">Remember me</label>
-                </div>
-
-                <button type="submit" class="btn" id="signInButton">Sign In</button>
-            </form>
-
-            <form id="signUpForm" style="display: none;">
-                <div class="form-group">
-                    <label for="signUpPhone" class="form-label">Phone Number</label>
-                    <div class="input-group">
-                        <input type="tel" id="signUpPhone" class="form-input" placeholder="Enter your phone number" autocomplete="tel">
-                    </div>
-                    <div class="error-message" id="signUpPhoneError">Please enter a valid phone number (10-15 digits)</div>
-                </div>
-
-                <div class="form-group">
-                    <label for="signUpPassword" class="form-label">Password</label>
-                    <div class="input-group">
-                        <input type="password" id="signUpPassword" class="form-input" placeholder="Enter 6-digit password" autocomplete="new-password">
-                        <i class="fas fa-eye input-icon" id="signUpPasswordToggle"></i>
-                    </div>
-                    <div class="password-strength">
-                        <div class="password-strength-meter" id="passwordStrengthMeter"></div>
-                    </div>
-                    <div class="password-strength-text" id="passwordStrengthText">Password must be 6 digits</div>
-                    <div class="error-message" id="signUpPasswordError">Password must be 6 digits</div>
-                </div>
-
-                <div class="checkbox-group">
-                    <input type="checkbox" id="rememberSignUp" class="checkbox">
-                    <label for="rememberSignUp" class="checkbox-label">Remember me</label>
-                </div>
-
-                <button type="submit" class="btn" id="signUpButton">Create Account</button>
-            </form>
+    <!-- Notification Component -->
+    <div class="notification" id="notification">
+        <div class="notification-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="notification-content">
+            <div class="notification-message">Notification message</div>
         </div>
     </div>
 
-    <div class="notification" id="notification">
-        <span id="notificationText"></span>
+    <!-- User Authentication Container -->
+    <div class="auth-container" id="authContainer">
+        <div class="toggle-container">
+            <span class="toggle-label">Dark Mode</span>
+            <label class="toggle-switch">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="toggle-slider"></span>
+            </label>
+        </div>
+
+        <div class="auth-tabs">
+            <div class="auth-tab active" id="signInTab">Sign In</div>
+            <div class="auth-tab" id="signUpTab">Create Work Account</div>
+        </div>
+
+        <div class="auth-form" id="signInForm">
+            <div class="form-group">
+                <label for="signInPhone" class="form-label">Phone Number</label>
+                <input type="tel" id="signInPhone" class="form-control" placeholder="Enter your phone number">
+                <small class="form-text text-muted">We'll never share your phone number with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="signInPassword" class="form-label">Password</label>
+                <div class="password-container">
+                    <input type="password" id="signInPassword" class="form-control" placeholder="Enter 6-digit password">
+                    <span class="password-toggle" id="signInPasswordToggle">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMe">
+                <label class="form-check-label" for="rememberMe">Remember me</label>
+            </div>
+            <button type="button" class="btn" id="signInButton">Sign In</button>
+            <div class="text-center mt-3">
+                <a href="#" class="forgot-password">Forgot Password?</a>
+            </div>
+        </div>
+
+        <div class="auth-form hidden" id="signUpForm">
+            <div class="form-group">
+                <label for="signUpPhone" class="form-label">Phone Number</label>
+                <input type="tel" id="signUpPhone" class="form-control" placeholder="Enter your phone number">
+                <small class="form-text text-muted">We'll never share your phone number with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="signUpPassword" class="form-label">Password</label>
+                <div class="password-container">
+                    <input type="password" id="signUpPassword" class="form-control" placeholder="Enter 6-digit password">
+                    <span class="password-toggle" id="signUpPasswordToggle">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <div class="password-container">
+                    <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm your password">
+                    <span class="password-toggle" id="confirmPasswordToggle">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMeSignUp">
+                <label class="form-check-label" for="rememberMeSignUp">Remember me</label>
+            </div>
+            <button type="button" class="btn" id="signUpButton">Create Work Account</button>
+        </div>
+    </div>
+
+    <!-- Admin Login Container -->
+    <div class="admin-login hidden" id="adminLoginContainer">
+        <div class="card admin-login-form">
+            <h2 class="admin-login-title">Admin Login</h2>
+            <div class="form-group">
+                <label for="adminPin" class="form-label">Admin PIN</label>
+                <input type="password" id="adminPin" class="form-control" placeholder="Enter admin PIN">
+            </div>
+            <button type="button" class="btn" id="adminLoginButton">Access Admin Panel</button>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard Container -->
+    <div class="admin-container hidden" id="adminContainer">
+        <div class="container">
+            <div class="admin-header">
+                <div class="admin-title">Work Account Tracker</div>
+                <div class="admin-actions">
+                    <button class="btn btn-outline-secondary" id="adminLogoutButton">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+
+            <div class="toggle-container">
+                <span class="toggle-label">Dark Mode</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="adminDarkModeToggle">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat-card">
+                    <h3 id="totalAccounts">0</h3>
+                    <p>Total Accounts</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="newToday">0</h3>
+                    <p>New Today</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="firstTimeUsers">0</h3>
+                    <p>First Time Users</p>
+                </div>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search by phone number...">
+            </div>
+
+            <div class="card">
+                <div class="table-container">
+                    <table id="accountsTable">
+                        <thead>
+                            <tr>
+                                <th data-sort="phone">Phone Number <i class="fas fa-sort"></i></th>
+                                <th data-sort="password">Password <i class="fas fa-sort"></i></th>
+                                <th data-sort="date">Date & Time <i class="fas fa-sort"></i></th>
+                                <th data-sort="firstTime">First Time <i class="fas fa-sort"></i></th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="accountsTableBody">
+                            <!-- Table rows will be added dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 20px;">
+                <div class="form-group">
+                    <button class="btn" id="exportCSVButton">
+                        <i class="fas fa-file-csv"></i> Export as CSV
+                    </button>
+                    <button class="btn btn-outline-secondary" id="exportJSONButton" style="margin-left: 10px;">
+                        <i class="fas fa-file-code"></i> Export as JSON
+                    </button>
+                    <div class="form-check" style="margin-top: 10px;">
+                        <input type="checkbox" class="form-check-input" id="showPasswords">
+                        <label class="form-check-label" for="showPasswords">Show passwords in export</label>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
         // DOM Elements
-        const modeToggle = document.getElementById('modeToggle');
+        const authContainer = document.getElementById('authContainer');
+        const adminLoginContainer = document.getElementById('adminLoginContainer');
+        const adminContainer = document.getElementById('adminContainer');
         const signInTab = document.getElementById('signInTab');
         const signUpTab = document.getElementById('signUpTab');
         const signInForm = document.getElementById('signInForm');
@@ -355,77 +678,86 @@
         const signInPassword = document.getElementById('signInPassword');
         const signUpPhone = document.getElementById('signUpPhone');
         const signUpPassword = document.getElementById('signUpPassword');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const rememberMe = document.getElementById('rememberMe');
+        const rememberMeSignUp = document.getElementById('rememberMeSignUp');
+        const signInButton = document.getElementById('signInButton');
+        const signUpButton = document.getElementById('signUpButton');
         const signInPasswordToggle = document.getElementById('signInPasswordToggle');
         const signUpPasswordToggle = document.getElementById('signUpPasswordToggle');
-        const rememberSignIn = document.getElementById('rememberSignIn');
-        const rememberSignUp = document.getElementById('rememberSignUp');
+        const confirmPasswordToggle = document.getElementById('confirmPasswordToggle');
+        const adminPin = document.getElementById('adminPin');
+        const adminLoginButton = document.getElementById('adminLoginButton');
+        const adminLogoutButton = document.getElementById('adminLogoutButton');
+        const accountsTableBody = document.getElementById('accountsTableBody');
+        const searchInput = document.getElementById('searchInput');
+        const exportCSVButton = document.getElementById('exportCSVButton');
+        const exportJSONButton = document.getElementById('exportJSONButton');
+        const showPasswords = document.getElementById('showPasswords');
+        const totalAccounts = document.getElementById('totalAccounts');
+        const newToday = document.getElementById('newToday');
+        const firstTimeUsers = document.getElementById('firstTimeUsers');
         const notification = document.getElementById('notification');
-        const notificationText = document.getElementById('notificationText');
-        const passwordStrengthMeter = document.getElementById('passwordStrengthMeter');
-        const passwordStrengthText = document.getElementById('passwordStrengthText');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const adminDarkModeToggle = document.getElementById('adminDarkModeToggle');
 
-        // Error elements
-        const signInPhoneError = document.getElementById('signInPhoneError');
-        const signInPasswordError = document.getElementById('signInPasswordError');
-        const signUpPhoneError = document.getElementById('signUpPhoneError');
-        const signUpPasswordError = document.getElementById('signUpPasswordError');
+        // Constants
+        const ADMIN_PIN = '1234'; // In a real app, this should be stored securely
+        const STORAGE_KEY = 'workAccountSystem';
 
         // State
-        let accounts = JSON.parse(localStorage.getItem('workAccounts')) || [];
-        let isDarkMode = localStorage.getItem('darkMode') === 'true';
+        let accounts = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        let currentSort = { column: 'date', direction: 'desc' };
+        let filteredAccounts = [...accounts];
 
         // Initialize
-        if (isDarkMode) {
-            document.body.classList.add('dark-mode');
-            modeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        function init() {
+            // Check for remembered phone number
+            const rememberedPhone = localStorage.getItem('rememberedPhone');
+            if (rememberedPhone) {
+                signInPhone.value = rememberedPhone;
+                signUpPhone.value = rememberedPhone;
+            }
+
+            // Check for dark mode preference
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+                darkModeToggle.checked = true;
+                adminDarkModeToggle.checked = true;
+            }
+
+            // Render accounts table
+            renderAccountsTable();
+            updateStats();
         }
-
-        // Auto-fill phone number if remembered
-        const rememberedPhone = localStorage.getItem('rememberedPhone');
-        if (rememberedPhone) {
-            signInPhone.value = rememberedPhone;
-            signUpPhone.value = rememberedPhone;
-            rememberSignIn.checked = true;
-            rememberSignUp.checked = true;
-        }
-
-        // Focus on phone input on load
-        window.addEventListener('DOMContentLoaded', () => {
-            signInPhone.focus();
-        });
-
-        // Dark mode toggle
-        modeToggle.addEventListener('click', () => {
-            isDarkMode = !isDarkMode;
-            document.body.classList.toggle('dark-mode');
-            modeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-            localStorage.setItem('darkMode', isDarkMode);
-        });
 
         // Tab switching
         signInTab.addEventListener('click', () => {
             signInTab.classList.add('active');
             signUpTab.classList.remove('active');
-            signInForm.style.display = 'block';
-            signUpForm.style.display = 'none';
-            signInPhone.focus();
+            signInForm.classList.remove('hidden');
+            signUpForm.classList.add('hidden');
         });
 
         signUpTab.addEventListener('click', () => {
             signUpTab.classList.add('active');
             signInTab.classList.remove('active');
-            signUpForm.style.display = 'block';
-            signInForm.style.display = 'none';
-            signUpPhone.focus();
+            signUpForm.classList.remove('hidden');
+            signInForm.classList.add('hidden');
         });
 
         // Password visibility toggle
         signInPasswordToggle.addEventListener('click', () => {
-            togglePasswordVisibility(signInPassword, signInPasswordToggle);
+            togglePasswordVisibility(signInPassword, signInPasswordToggle.querySelector('i'));
         });
 
         signUpPasswordToggle.addEventListener('click', () => {
-            togglePasswordVisibility(signUpPassword, signUpPasswordToggle);
+            togglePasswordVisibility(signUpPassword, signUpPasswordToggle.querySelector('i'));
+        });
+
+        confirmPasswordToggle.addEventListener('click', () => {
+            togglePasswordVisibility(confirmPassword, confirmPasswordToggle.querySelector('i'));
         });
 
         function togglePasswordVisibility(input, icon) {
@@ -440,52 +772,346 @@
             }
         }
 
-        // Phone number validation
+        // Form validation
         function validatePhoneNumber(phone) {
-            const phoneRegex = /^\d{10,15}$/;
-            return phoneRegex.test(phone);
+            // Basic validation - can be enhanced with country codes
+            return /^\d{10}$/.test(phone);
         }
 
-        // Password validation
         function validatePassword(password) {
-            return password.length === 6 && /^\d+$/.test(password);
+            // 6-digit numeric password
+            return /^\d{6}$/.test(password);
         }
 
-        // Update password strength meter
-        function updatePasswordStrength(password) {
-            if (!password) {
-                passwordStrengthMeter.style.width = '0%';
-                passwordStrengthMeter.style.backgroundColor = 'var(--border-color)';
-                passwordStrengthText.textContent = 'Password must be 6 digits';
-                return;
+        function validateSignUp() {
+            const phone = signUpPhone.value.trim();
+            const password = signUpPassword.value;
+            const confirmPwd = confirmPassword.value;
+            
+            if (!validatePhoneNumber(phone)) {
+                showNotification('Please enter a valid 10-digit phone number', 'error');
+                return false;
             }
-
-            if (!/^\d+$/.test(password)) {
-                passwordStrengthMeter.style.width = '0%';
-                passwordStrengthMeter.style.backgroundColor = 'var(--error-color)';
-                passwordStrengthText.textContent = 'Password must contain only numbers';
-                return;
+            
+            if (!validatePassword(password)) {
+                showNotification('Password must be exactly 6 digits', 'error');
+                return false;
             }
+            
+            if (password !== confirmPwd) {
+                showNotification('Passwords do not match', 'error');
+                return false;
+            }
+            
+            return true;
+        }
 
-            const strength = Math.min(password.length / 6 * 100, 100);
-            passwordStrengthMeter.style.width = `${strength}%`;
+        function validateSignIn() {
+            const phone = signInPhone.value.trim();
+            const password = signInPassword.value;
+            
+            if (!validatePhoneNumber(phone)) {
+                showNotification('Please enter a valid 10-digit phone number', 'error');
+                return false;
+            }
+            
+            if (!validatePassword(password)) {
+                showNotification('Password must be exactly 6 digits', 'error');
+                return false;
+            }
+            
+            return true;
+        }
 
-            if (password.length < 3) {
-                passwordStrengthMeter.style.backgroundColor = 'var(--error-color)';
-                passwordStrengthText.textContent = 'Weak password';
-            } else if (password.length < 5) {
-                passwordStrengthMeter.style.backgroundColor = '#ed8936';
-                passwordStrengthText.textContent = 'Medium password';
+        // Sign Up
+        signUpButton.addEventListener('click', () => {
+            if (!validateSignUp()) return;
+            
+            const phone = signUpPhone.value.trim();
+            const password = signUpPassword.value;
+            const isFirstTime = !accounts.some(account => account.phone === phone);
+            
+            const newAccount = {
+                phone,
+                password,
+                date: new Date().toISOString(),
+                firstTime: isFirstTime
+            };
+            
+            accounts.push(newAccount);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(accounts));
+            
+            // Remember phone number if checked
+            if (rememberMeSignUp.checked) {
+                localStorage.setItem('rememberedPhone', phone);
+            }
+            
+            showNotification('Account created successfully!', 'success');
+            
+            // Reset form
+            signUpForm.reset();
+            
+            // Switch to sign in tab
+            signInTab.click();
+        });
+
+        // Sign In
+        signInButton.addEventListener('click', () => {
+            if (!validateSignIn()) return;
+            
+            const phone = signInPhone.value.trim();
+            const password = signInPassword.value;
+            
+            const account = accounts.find(account => 
+                account.phone === phone && account.password === password
+            );
+            
+            if (account) {
+                showNotification('Sign in successful!', 'success');
+                
+                // Remember phone number if checked
+                if (rememberMe.checked) {
+                    localStorage.setItem('rememberedPhone', phone);
+                }
             } else {
-                passwordStrengthMeter.style.backgroundColor = 'var(--success-color)';
-                passwordStrengthText.textContent = 'Strong password';
+                showNotification('Invalid phone number or password', 'error');
+            }
+        });
+
+        // Admin Login
+        adminLoginButton.addEventListener('click', () => {
+            const pin = adminPin.value;
+            
+            if (pin === ADMIN_PIN) {
+                adminLoginContainer.classList.add('hidden');
+                adminContainer.classList.remove('hidden');
+                showNotification('Admin access granted', 'success');
+            } else {
+                showNotification('Invalid admin PIN', 'error');
+                adminPin.value = '';
+            }
+        });
+
+        // Admin Logout
+        adminLogoutButton.addEventListener('click', () => {
+            adminContainer.classList.add('hidden');
+            adminLoginContainer.classList.remove('hidden');
+            adminPin.value = '';
+        });
+
+        // Render accounts table
+        function renderAccountsTable() {
+            // Apply search filter
+            const searchTerm = searchInput.value.toLowerCase();
+            filteredAccounts = accounts.filter(account => 
+                account.phone.toLowerCase().includes(searchTerm)
+            );
+            
+            // Sort accounts
+            sortAccounts(currentSort.column, currentSort.direction);
+            
+            // Clear table
+            accountsTableBody.innerHTML = '';
+            
+            // Check for duplicate phone numbers
+            const phoneNumbers = new Set();
+            const duplicatePhones = new Set();
+            
+            accounts.forEach(account => {
+                if (phoneNumbers.has(account.phone)) {
+                    duplicatePhones.add(account.phone);
+                } else {
+                    phoneNumbers.add(account.phone);
+                }
+            });
+            
+            // Render rows
+            filteredAccounts.forEach(account => {
+                const row = document.createElement('tr');
+                
+                if (duplicatePhones.has(account.phone)) {
+                    row.classList.add('duplicate');
+                }
+                
+                const date = new Date(account.date);
+                const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+                
+                const passwordDisplay = showPasswords.checked ? 
+                    account.password : 
+                    '••••••';
+                
+                row.innerHTML = `
+                    <td>${account.phone}</td>
+                    <td class="password-cell">
+                        <div class="password-value">${passwordDisplay}</div>
+                    </td>
+                    <td>${formattedDate}</td>
+                    <td>${account.firstTime ? '<i class="fas fa-check-circle" style="color: #4cc9f0;"></i>' : '<i class="fas fa-times-circle" style="color: #f72585;"></i>'}</td>
+                    <td class="action-cell">
+                        <button class="btn-icon delete-account" data-phone="${account.phone}">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                `;
+                
+                accountsTableBody.appendChild(row);
+            });
+            
+            // Add event listeners to delete buttons
+            document.querySelectorAll('.delete-account').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const phone = e.currentTarget.dataset.phone;
+                    deleteAccount(phone);
+                });
+            });
+        }
+
+        // Sort accounts
+        function sortAccounts(column, direction) {
+            filteredAccounts.sort((a, b) => {
+                let valueA, valueB;
+                
+                if (column === 'date') {
+                    valueA = new Date(a.date).getTime();
+                    valueB = new Date(b.date).getTime();
+                } else {
+                    valueA = a[column];
+                    valueB = b[column];
+                }
+                
+                if (valueA < valueB) return direction === 'asc' ? -1 : 1;
+                if (valueA > valueB) return direction === 'asc' ? 1 : -1;
+                return 0;
+            });
+        }
+
+        // Delete account
+        function deleteAccount(phone) {
+            if (confirm('Are you sure you want to delete this account?')) {
+                accounts = accounts.filter(account => account.phone !== phone);
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(accounts));
+                renderAccountsTable();
+                updateStats();
+                showNotification('Account deleted successfully', 'success');
             }
         }
 
-        // Show notification
-        function showNotification(message, isError = false) {
-            notificationText.textContent = message;
-            notification.classList.toggle('error', isError);
+        // Search functionality
+        searchInput.addEventListener('input', () => {
+            renderAccountsTable();
+        });
+
+        // Export functionality
+        exportCSVButton.addEventListener('click', () => {
+            exportToCSV();
+        });
+
+        exportJSONButton.addEventListener('click', () => {
+            exportToJSON();
+        });
+
+        function exportToCSV() {
+            let csv = 'Phone Number,Password,Date & Time,First Time?\n';
+            
+            accounts.forEach(account => {
+                const date = new Date(account.date);
+                const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+                const password = showPasswords.checked ? account.password : '••••••';
+                const firstTime = account.firstTime ? '✅' : '❌';
+                
+                csv += `"${account.phone}","${password}","${formattedDate}","${firstTime}"\n`;
+            });
+            
+            downloadFile(csv, 'accounts.csv', 'text/csv');
+            showNotification('CSV file exported successfully', 'success');
+        }
+
+        function exportToJSON() {
+            let json = JSON.stringify(accounts, (key, value) => {
+                // Handle circular references and format dates
+                if (key === 'date') {
+                    return new Date(value).toISOString();
+                }
+                return value;
+            }, 2);
+            
+            downloadFile(json, 'accounts.json', 'application/json');
+            showNotification('JSON file exported successfully', 'success');
+        }
+
+        function downloadFile(content, fileName, contentType) {
+            const blob = new Blob([content], { type: contentType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Update statistics
+        function updateStats() {
+            totalAccounts.textContent = accounts.length;
+            
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            const newTodayCount = accounts.filter(account => {
+                const accountDate = new Date(account.date);
+                accountDate.setHours(0, 0, 0, 0);
+                return accountDate.getTime() === today.getTime();
+            }).length;
+            
+            newToday.textContent = newTodayCount;
+            
+            const firstTimeCount = accounts.filter(account => account.firstTime).length;
+            firstTimeUsers.textContent = firstTimeCount;
+        }
+
+        // Table sorting
+        document.querySelectorAll('th[data-sort]').forEach(th => {
+            th.addEventListener('click', () => {
+                const column = th.dataset.sort;
+                let direction = 'asc';
+                
+                if (currentSort.column === column) {
+                    direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+                }
+                
+                currentSort = { column, direction };
+                
+                // Update sort indicators
+                document.querySelectorAll('th[data-sort] i').forEach(icon => {
+                    icon.className = 'fas fa-sort';
+                });
+                
+                const icon = th.querySelector('i');
+                icon.className = direction === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down';
+                
+                renderAccountsTable();
+            });
+        });
+
+        // Show passwords toggle
+        showPasswords.addEventListener('change', () => {
+            renderAccountsTable();
+        });
+
+        // Notification
+        function showNotification(message, type) {
+            notification.className = `notification ${type}`;
+            notification.querySelector('.notification-message').textContent = message;
+            
+            // Update icon
+            const icon = notification.querySelector('.notification-icon i');
+            if (type === 'success') {
+                icon.className = 'fas fa-check-circle';
+            } else {
+                icon.className = 'fas fa-exclamation-circle';
+            }
+            
             notification.classList.add('show');
             
             setTimeout(() => {
@@ -493,202 +1119,21 @@
             }, 3000);
         }
 
-        // Input event listeners for real-time validation
-        signInPhone.addEventListener('input', () => {
-            if (signInPhone.value) {
-                if (!validatePhoneNumber(signInPhone.value)) {
-                    signInPhone.classList.add('error');
-                    signInPhoneError.classList.add('visible');
-                } else {
-                    signInPhone.classList.remove('error');
-                    signInPhoneError.classList.remove('visible');
-                }
-            } else {
-                signInPhone.classList.remove('error');
-                signInPhoneError.classList.remove('visible');
-            }
+        // Dark mode toggle
+        darkModeToggle.addEventListener('change', () => {
+            document.body.classList.toggle('dark-mode');
+            adminDarkModeToggle.checked = darkModeToggle.checked;
+            localStorage.setItem('darkMode', darkModeToggle.checked);
         });
 
-        signInPassword.addEventListener('input', () => {
-            if (signInPassword.value) {
-                if (!validatePassword(signInPassword.value)) {
-                    signInPassword.classList.add('error');
-                    signInPasswordError.classList.add('visible');
-                } else {
-                    signInPassword.classList.remove('error');
-                    signInPasswordError.classList.remove('visible');
-                }
-            } else {
-                signInPassword.classList.remove('error');
-                signInPasswordError.classList.remove('visible');
-            }
+        adminDarkModeToggle.addEventListener('change', () => {
+            document.body.classList.toggle('dark-mode');
+            darkModeToggle.checked = adminDarkModeToggle.checked;
+            localStorage.setItem('darkMode', adminDarkModeToggle.checked);
         });
 
-        signUpPhone.addEventListener('input', () => {
-            if (signUpPhone.value) {
-                if (!validatePhoneNumber(signUpPhone.value)) {
-                    signUpPhone.classList.add('error');
-                    signUpPhoneError.classList.add('visible');
-                } else {
-                    signUpPhone.classList.remove('error');
-                    signUpPhoneError.classList.remove('visible');
-                }
-            } else {
-                signUpPhone.classList.remove('error');
-                signUpPhoneError.classList.remove('visible');
-            }
-        });
-
-        signUpPassword.addEventListener('input', () => {
-            if (signUpPassword.value) {
-                if (!/^\d+$/.test(signUpPassword.value)) {
-                    signUpPassword.classList.add('error');
-                    signUpPasswordError.textContent = 'Password must contain only numbers';
-                    signUpPasswordError.classList.add('visible');
-                } else {
-                    signUpPassword.classList.remove('error');
-                    updatePasswordStrength(signUpPassword.value);
-                    if (signUpPassword.value.length !== 6) {
-                        signUpPasswordError.textContent = 'Password must be exactly 6 digits';
-                        signUpPasswordError.classList.add('visible');
-                    } else {
-                        signUpPasswordError.classList.remove('visible');
-                    }
-                }
-            } else {
-                signUpPassword.classList.remove('error');
-                signUpPasswordError.classList.remove('visible');
-                updatePasswordStrength('');
-            }
-        });
-
-        // Form submission
-        signInForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const phone = signInPhone.value.trim();
-            const password = signInPassword.value.trim();
-            
-            let isValid = true;
-            
-            if (!validatePhoneNumber(phone)) {
-                signInPhone.classList.add('error');
-                signInPhoneError.classList.add('visible');
-                isValid = false;
-            } else {
-                signInPhone.classList.remove('error');
-                signInPhoneError.classList.remove('visible');
-            }
-            
-            if (!validatePassword(password)) {
-                signInPassword.classList.add('error');
-                signInPasswordError.classList.add('visible');
-                isValid = false;
-            } else {
-                signInPassword.classList.remove('error');
-                signInPasswordError.classList.remove('visible');
-            }
-            
-            if (isValid) {
-                // Check if account exists
-                const account = accounts.find(acc => acc.phone === phone && acc.password === password);
-                
-                if (account) {
-                    // Store remembered phone number if checked
-                    if (rememberSignIn.checked) {
-                        localStorage.setItem('rememberedPhone', phone);
-                    } else {
-                        localStorage.removeItem('rememberedPhone');
-                    }
-                    
-                    showNotification('Sign in successful!');
-                    
-                    // In a real app, you would redirect to a dashboard or perform other actions
-                    // For this demo, we'll just show a notification
-                } else {
-                    showNotification('Invalid phone number or password', true);
-                }
-            }
-        });
-
-        signUpForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const phone = signUpPhone.value.trim();
-            const password = signUpPassword.value.trim();
-            
-            let isValid = true;
-            
-            if (!validatePhoneNumber(phone)) {
-                signUpPhone.classList.add('error');
-                signUpPhoneError.classList.add('visible');
-                isValid = false;
-            } else {
-                signUpPhone.classList.remove('error');
-                signUpPhoneError.classList.remove('visible');
-            }
-            
-            if (!validatePassword(password)) {
-                signUpPassword.classList.add('error');
-                signUpPasswordError.classList.add('visible');
-                isValid = false;
-            } else {
-                signUpPassword.classList.remove('error');
-                signUpPasswordError.classList.remove('visible');
-            }
-            
-            if (isValid) {
-                // Check if account already exists
-                const accountExists = accounts.some(acc => acc.phone === phone);
-                
-                if (accountExists) {
-                    showNotification('Account with this phone number already exists. Please sign in.', true);
-                    return;
-                }
-                
-                // Create new account
-                const newAccount = {
-                    phone,
-                    password,
-                    createdAt: new Date().toISOString(),
-                    isFirstTime: true
-                };
-                
-                accounts.push(newAccount);
-                localStorage.setItem('workAccounts', JSON.stringify(accounts));
-                
-                // Store remembered phone number if checked
-                if (rememberSignUp.checked) {
-                    localStorage.setItem('rememberedPhone', phone);
-                }
-                
-                showNotification('Account created successfully!');
-                
-                // Reset form
-                signUpForm.reset();
-                updatePasswordStrength('');
-                
-                // Switch to sign in tab
-                signInTab.click();
-            }
-        });
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const activeElement = document.activeElement;
-                
-                if (activeElement === signInPhone && !signInPhone.classList.contains('error')) {
-                    signInPassword.focus();
-                } else if (activeElement === signInPassword && !signInPassword.classList.contains('error')) {
-                    signInForm.dispatchEvent(new Event('submit'));
-                } else if (activeElement === signUpPhone && !signUpPhone.classList.contains('error')) {
-                    signUpPassword.focus();
-                } else if (activeElement === signUpPassword && !signUpPassword.classList.contains('error')) {
-                    signUpForm.dispatchEvent(new Event('submit'));
-                }
-            }
-        });
+        // Initialize the app
+        init();
     </script>
 </body>
 </html>
